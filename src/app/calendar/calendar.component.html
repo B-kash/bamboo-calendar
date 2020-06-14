@@ -1,0 +1,73 @@
+<div class="row text-center">
+  <div class="col-md-4">
+    <mat-button-toggle-group>
+      <mat-button-toggle
+        (click)="setView(CalendarView.Month)"
+      >
+        Month
+      </mat-button-toggle>
+      <mat-button-toggle
+        (click)="setView(CalendarView.Week)"
+      >
+        Week
+      </mat-button-toggle>
+      <mat-button-toggle
+        (click)="setView(CalendarView.Day)"
+      >
+        Day
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="col-md-4">
+    <div class="title">
+      <h3>
+        {{ state.viewDate | calendarDate:(state.view + 'ViewTitle'):'en' }}
+      </h3>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <mat-button-toggle-group>
+      <mat-button-toggle
+        mwlCalendarPreviousView
+        [view]="state.view"
+        [(viewDate)]="state.viewDate"
+
+      >
+        Previous
+      </mat-button-toggle>
+      <mat-button-toggle
+        mwlCalendarToday
+        [(viewDate)]="state.viewDate"
+      >
+        Today
+      </mat-button-toggle>
+      <mat-button-toggle
+        mwlCalendarNextView
+        [view]="state.view"
+        [(viewDate)]="state.viewDate"
+
+      >
+        Next
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+
+<mwl-calendar-month-view
+  *ngIf="state.view == CalendarView.Month"
+  [viewDate]="state.viewDate"
+  [events]="state.events"
+></mwl-calendar-month-view>
+
+<mwl-calendar-week-view
+  *ngIf="state.view == CalendarView.Week"
+  [viewDate]="state.viewDate"
+  [events]="state.events"
+></mwl-calendar-week-view>
+
+
+<mwl-calendar-day-view
+  *ngIf="state.view == CalendarView.Day"
+  [viewDate]="state.viewDate"
+  [events]="state.events"
+></mwl-calendar-day-view>
